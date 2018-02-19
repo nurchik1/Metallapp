@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/select2/css/select2.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/select2/css/select2-bootstrap.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/datatables/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/datatables/plugins/bootstrap/datatables.bootstrap.css" />
+    
+    <link href="css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="css/plugins.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="css/profile.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/ticket.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/darkblue.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Hello World</title>
+</head>
+
+<body>
+    <div class="app">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <a href="index.html">Домой</a>
+
+                            <i class="fa fa-circle"></i>
+
+                        </li>
+
+                        <li>
+                            <p>Добро пожаловать {{ user.name }}</p>
+                            <p>Nobody is logged in</p>
+                        </li>
+
+                    </ul>
+
+                    <div class="page-toolbar">
+
+                        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
+
+                            <i class="icon-calendar"></i>&nbsp;
+
+                            <span class="thin uppercase hidden-xs"></span>&nbsp;
+
+                            <i class="fa fa-angle-down"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <h1 class="page-title">
+                    <small>Статистика Бишкек</small>
+                </h1>
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-comments"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="1349">0</span>
+
+                                </div>
+
+                                <div class="desc"> Реализация </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-bar-chart-o"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="12,5">0</span>M$
+
+                                </div>
+
+                                <div class="desc"> Остаток ТМЦ </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-shopping-cart"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="{{expenses.count}}">0</span>
+
+                                </div>
+
+                                <div class="desc"> Остаток Касса </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-globe"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number"> +
+
+                                    <span data-counter="counterup" data-value="89"></span>
+
+                                </div>
+
+                                <div class="desc"> Долги </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </div>
+                <h1 class="page-title">
+                    <small>Статистика Ош</small>
+                </h1>
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-comments"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="1349">0</span>
+
+                                </div>
+
+                                <div class="desc"> Реализация </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-bar-chart-o"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="12,5">0</span>M$
+
+                                </div>
+
+                                <div class="desc"> Остаток ТМЦ </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-shopping-cart"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="{{expenses.count}}">0</span>
+
+                                </div>
+
+                                <div class="desc"> Остаток Касса </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-globe"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number"> +
+
+                                    <span data-counter="counterup" data-value="89"></span>%
+
+                                </div>
+
+                                <div class="desc"> Долги </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </div>
+                <h1 class="page-title">
+                    <small>Статистика Ош 2</small>
+                </h1>
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-comments"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="1349">0</span>
+
+                                </div>
+
+                                <div class="desc"> Реализация </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-bar-chart-o"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="12,5">0</span>M$
+
+                                </div>
+
+                                <div class="desc"> Остаток ТМЦ </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-shopping-cart"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="{{expenses.count}}">0</span>
+
+                                </div>
+
+                                <div class="desc"> Остаток Касса </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-globe"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number"> +
+
+                                    <span data-counter="counterup" data-value="89"></span>%
+
+                                </div>
+
+                                <div class="desc"> Долги </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </div>
+                <h1 class="page-title">
+                    <small>Статистика Кызылкыя</small>
+                </h1>
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-comments"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="1349">0</span>
+
+                                </div>
+
+                                <div class="desc"> Реализация </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-bar-chart-o"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="12,5">0</span>M$
+
+                                </div>
+
+                                <div class="desc"> Остаток ТМЦ </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-shopping-cart"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number">
+
+                                    <span data-counter="counterup" data-value="{{expenses.count}}">0</span>
+
+                                </div>
+
+                                <div class="desc"> Остаток Касса </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+
+                            <div class="visual">
+
+                                <i class="fa fa-globe"></i>
+
+                            </div>
+
+                            <div class="details">
+
+                                <div class="number"> +
+
+                                    <span data-counter="counterup" data-value="89"></span>%
+
+                                </div>
+
+                                <div class="desc"> Долги </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- END DASHBOARD STATS 1-->
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-share font-red-sunglo hide"></i>
+                                    <span class="caption-subject font-dark bold uppercase">Реализация</span>
+                                    <span class="caption-helper">Ежемесячная Статистика</span>
+                                </div>
+                                <div class="actions">
+                                    <div class="btn-group">
+                                        <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                            Фильтр по кварталам
+                                            <span class="fa fa-angle-down"> </span>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <a href="javascript:;"> 2018 1-й квартал</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;"> 2018 2-ой квартал</a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="javascript:;"> 2018 3-ий квартал</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;"> 2018 4-й квартал</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="site_activities_loading">
+                                    <img src="../assets/global/img/loading.gif" alt="Подождите" />
+                                </div>
+                                <div id="site_activities_content" class="display-none">
+                                    <div id="site_activities" style="height: 228px;"> </div>
+                                </div>
+                                <div style="margin: 20px 0 10px 30px">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                            <span class="label label-sm label-success"> Реализация: </span>
+                                            <h3>$13,234</h3>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                            <span class="label label-sm label-info"> Расходы: </span>
+                                            <h3>$134,900</h3>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                            <span class="label label-sm label-danger"> Транспорт: </span>
+                                            <h3>$1,134</h3>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                            <span class="label label-sm label-warning"> Долги: </span>
+                                            <h3>235090</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-bar-chart font-dark hide"></i>
+                                    <span class="caption-subject font-dark bold uppercase">Реализация Бишкек</span>
+                                    <span class="caption-helper">Ежемесячная Статистика</span>
+                                </div>
+                                <div class="actions">
+                                    <div class="btn-group">
+                                        <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                            Фильтр по кварталам
+                                            <span class="fa fa-angle-down"> </span>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <a href="javascript:;"> 2018 1-й квартал</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;"> 2018 2-ой квартал</a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="javascript:;"> 2018 3-ий квартал</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;"> 2018 4-й квартал</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="site_statistics_loading">
+                                    <img src="../assets/global/img/loading.gif" alt="Подождите" />
+                                </div>
+                                <div id="site_statistics_content" class="display-none">
+                                    <div id="site_statistics" class="chart"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-bar-chart font-dark hide"></i>
+                                    <span class="caption-subject font-dark bold uppercase">Реализация Ош</span>
+                                    <span class="caption-helper">Ежемесячная Статистика</span>
+                                </div>
+                                <div class="actions">
+                                    <div class="btn-group">
+                                        <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                            Фильтр по кварталам
+                                            <span class="fa fa-angle-down"> </span>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <a href="javascript:;"> 2018 1-й квартал</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;"> 2018 2-ой квартал</a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="javascript:;"> 2018 3-ий квартал</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;"> 2018 4-й квартал</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="site_statistics_loading2">
+                                    <img src="../assets/global/img/loading.gif" alt="Подождите" />
+                                </div>
+                                <div id="site_statistics_content2" class="display-none">
+                                    <div id="site_statistics2" class="chart"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-bar-chart font-dark hide"></i>
+                                    <span class="caption-subject font-dark bold uppercase">Реализация Кызылкыя</span>
+                                    <span class="caption-helper">Ежемесячная Статистика</span>
+                                </div>
+                                <div class="actions">
+                                    <div class="btn-group">
+                                        <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                            Фильтр по кварталам
+                                            <span class="fa fa-angle-down"> </span>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <a href="javascript:;"> 2018 1-й квартал</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;"> 2018 2-ой квартал</a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="javascript:;"> 2018 3-ий квартал</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;"> 2018 4-й квартал</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="site_statistics_loading3">
+                                    <img src="../assets/global/img/loading.gif" alt="Подождите" />
+                                </div>
+                                <div id="site_statistics_content3" class="display-none">
+                                    <div id="site_statistics3" class="chart"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- END CONTENT BODY -->
+
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/jquery.blockui.min.js"></script>
+    <script src="js/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+    <script src="js/counterup/jquery.waypoints.min.js"></script>
+    <script src="js/counterup/jquery.counterup.min.js"></script>
+    <script src="js/fullcalendar/fullcalendar.min.js"></script>
+    <script src="js/horizontal-timeline/horozontal-timeline.min.js"></script>
+    <script src="js/flot/jquery.flot.min.js"></script>
+    <script src="js/flot/jquery.flot.resize.min.js"></script>
+    <script src="js/flot/jquery.flot.categories.min.js"></script>
+    <script src="js/jquery-easypiechart/jquery.easypiechart.min.js"></script>
+    <script src="js/jquery.sparkline.min.js"></script>
+
+    <script type="text/javascript" src="js/app.min.js"></script>
+    <script type="text/javascript" src="js/dashboard.js"></script>
+    <script type="text/javascript" src="js/layout.min.js"></script>
+    <script type="text/javascript" src="js/demo.min.js"></script>
+    <script type="text/javascript" src="js/quick-sidebar.min.js"></script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+<script>
+     function getValues() {
+            var rows = document.querySelectorAll("tr.package-row");
+            rows.forEach(function (currentRow) {
+
+                var numberUsed = Number(currentRow.querySelector('#product_price').value);
+                var price = Number(currentRow.querySelector('#product_quantity').value);
+
+                var revenue = 0;
+
+                document.querySelectorAll('numberUsed');
+
+                if (numberUsed == "") {
+                    if (isNaN(price)) {
+                        return;
+                    }
+                    revenue = price * numberUsed;
+                }
+                else {
+                    if (isNaN(numberUsed) || isNaN(price)) {
+                        return;
+                    }
+                    revenue = price * numberUsed;
+                }
+                var value = revenue + " сом" ;
+                currentRow.querySelector("#product_sum").innerHTML = value;
+            });
+
+        }
+        document.querySelector('#check-button').addEventListener("click", CheckNull);
+        function CheckNull() {
+            var inputprice = document.querySelector('.check-null-price').value;
+            var inputqty = document.querySelector('.check-null-qty').value;
+            if(!inputprice || !inputqty){
+                event.preventDefault();
+                alert("Заполните поля цена, количество");
+            }
+            //document.getElementById(".check-button").innerHTML = "YOU CLICKED ME!";
+
+        }
+</script>
+</body>
+
+</html>
