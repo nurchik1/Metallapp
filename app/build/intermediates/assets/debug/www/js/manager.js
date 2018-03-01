@@ -53,7 +53,7 @@ function getProduct() {
                     data += '</h4></div>';
                     data += '<div id="'+productcat[i].name+'" class="panel-collapse collapse">';
                     data += '<table class="table table-striped table-hover table-bordered" id="sample_editable_1">';
-                    data += '<thead><tr><th> Наименование </th><th> Ед. Изм. </th> <th> Остаток </th> <th> Прайс. цена </th>  <th> Цена </th> <th> Количество </th><th> Сумма </th></tr></thead>';
+                    data += '<thead><tr><th styele="width:100px"> Наименование </th><th> Ед. Изм. </th> <th> Остаток </th> <th> Прайс. цена </th>  <th> Цена </th> <th> Количество </th><th> Сумма </th></tr></thead>';
 				    data += '<tbody>';
 				    for (j = 0; j < productcat[i].products.length; j++) {
 				    	data += '<tr class="odd gradeX package-row">';

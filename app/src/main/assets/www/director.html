@@ -1,788 +1,1511 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
-    <!-- Good default declaration:
-    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-        * Enable inline JS: add 'unsafe-inline' to default-src
-        * Enable eval(): add 'unsafe-eval' to default-src
-    * Create your own at http://cspisawesome.com
-    -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-    <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css" />
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="msapplication-tap-highlight" content="no"/>
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+        <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *"/>
+        <!-- Good default declaration: * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this: * Enable inline JS: add 'unsafe-inline' to default-src * Enable eval(): add 'unsafe-eval' to default-src * Create your own at http://cspisawesome.com -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+        <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/simple-line-icons/simple-line-icons.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-switch/css/bootstrap-switch.min.css"/>
 
-    <link rel="stylesheet" type="text/css" href="css/select2/css/select2.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/select2/css/select2-bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/select2/css/select2.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/select2/css/select2-bootstrap.min.css"/>
 
-    <link rel="stylesheet" type="text/css" href="css/datatables/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/datatables/plugins/bootstrap/datatables.bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="css/datatables/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/datatables/plugins/bootstrap/datatables.bootstrap.css"/>
+
+        <link href="css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
+        <link href="css/plugins.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href="css/profile.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/ticket.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href="css/layout.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/darkblue.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/custom.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css"/>
+        <title>Hello World</title>
+    </head>
+
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+        <div class="app page-wrapper">
+            <!-- Header -->
+            <div class="page-header navbar navbar-fixed-top">
+                <!-- BEGIN HEADER INNER -->
+                <div class="page-header-inner ">
+                    <!-- BEGIN LOGO -->
+                    <div class="page-logo">
+                        <a href="/finans">
+                            <img src="img/logo.png" alt="logo" class="logo-default"/>
+                        </a>
+
+                    </div>
+                    <!-- END LOGO -->
+                    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span></span>
+                    </a>
+                    <!-- END RESPONSIVE MENU TOGGLER -->
+                    <!-- BEGIN TOP NAVIGATION MENU -->
+                    <div class="top-menu">
+                        <ul class="nav navbar-nav pull-right">
+                            <!-- BEGIN USER LOGIN DROPDOWN -->
+                            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                            <li class="dropdown dropdown-user">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <img alt="" class="img-circle" src="img/avatar3_small.jpg"/>
+                                    <span class="username username-hide-on-mobile">
+                                        Admin
+                                    </span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-default">
+
+                                    <li>
+                                        <a href="/finans/profile/2">
+                                            <i class="icon-user"></i>
+                                            Мой Профиль
+                                        </a>
+                                    </li>
+
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="page_user_lock_1.html">
+                                            <i class="icon-lock"></i>
+                                            Lock Screen
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-request="onLogout" data-request-data="redirect: '/'">
+                                            <i class="icon-key"></i>
+                                            Log Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- END USER LOGIN DROPDOWN -->
+
+                        </ul>
+                    </div>
+                    <!-- END TOP NAVIGATION MENU -->
+                </div>
+                <!-- END HEADER INNER -->
+            </div>
+            <!-- Header! -->
+            <div class="clearfix"></div>
+            <div class="page-container">
+
+                <!-- BEGIN SIDEBAR -->
+
+                <div class="page-sidebar-wrapper">
+                    <!-- BEGIN SIDEBAR -->
+
+                    <div class="page-sidebar navbar-collapse collapse">
+
+                        <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+
+                            <li class="sidebar-search-wrapper">
+                                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+
+                                <form class="sidebar-search" action="/" method="POST">
+                                    <a href="javascript:;" class="remove">
+                                        <i class="icon-close"></i>
+                                    </a>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Поиск...">
+                                        <span class="input-group-btn">
+                                            <a href="javascript:;" class="btn submit">
+                                                <i class="icon-magnifier"></i>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </form>
+                                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-home"></i>
+                                    <span class="title">Бишкек</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link nav-toggle">
+                                            <i class="icon-diamond"></i>
+                                            <span class="title">Касса</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-settings"></i>
+                                            <span class="title">Продажа</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link ">
+                                                    <span class="title">Продажа</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link ">
+                                                    <span class="title">Реализация</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link ">
+                                                    <span class="title">Продажа в убыток</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-puzzle"></i>
+                                            <span class="title">Расходы</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li class="nav-item  ">
+                                                <a href="#" class="nav-link ">
+                                                    <span class="title">Расходы</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-basket"></i>
+                                            <span class="title">Товары</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li class="nav-item  ">
+                                                <a href="#" class="nav-link ">
+                                                    <i class="icon-home"></i>
+                                                    <span class="title">Товары</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-user"></i>
+                                            <span class="title">Пользователи</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li class="nav-item  ">
+                                                <a href="#" class="nav-link ">
+                                                    <i class="icon-user-female"></i>
+                                                    <span class="title">Системные Позьзователи</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-home"></i>
+                                    <span class="title">Ош-1</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link nav-toggle">
+                                            <i class="icon-diamond"></i>
+                                            <span class="title">Касса</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-settings"></i>
+                                            <span class="title">Продажа</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li class="nav-item  ">
+                                                <a href="#" class="nav-link ">
+                                                    <span class="title">Продажа</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item  ">
+                                                <a href="#" class="nav-link ">
+                                                    <span class="title">Реализация</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item  ">
+                                                <a href="#" class="nav-link ">
+                                                    <span class="title">Продажа в убыток</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-puzzle"></i>
+                                            <span class="title">Расходы</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li class="nav-item  ">
+                                                <a href="#" class="nav-link ">
+                                                    <span class="title">Расходы</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-basket"></i>
+                                            <span class="title">Товары</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li class="nav-item  ">
+                                                <a href="#" class="nav-link ">
+                                                    <i class="icon-home"></i>
+                                                    <span class="title">Товары</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-user"></i>
+                                            <span class="title">Пользователи</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+
+                                            <li class="nav-item  ">
+                                                <a href="/finans/users/2" class="nav-link ">
+                                                    <i class="icon-user-female"></i>
+                                                    <span class="title">Системные Позьзователи</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-home"></i>
+                                    <span class="title">Ош-2</span>
+                                    <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <a href="/finans/kassa/3" class="nav-link nav-toggle">
+                                            <i class="icon-diamond"></i>
+                                            <span class="title">Касса</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item  ">
+                                            <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-settings"></i>
+                                            <span class="title">Продажа</span>
+                                            <span class="arrow"></span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/sales/3" class="nav-link ">
+                                                  <span class="title">Продажа</span>
+                                                  </a>
+                                               </li>
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/realizations/3" class="nav-link ">
+                                                  <span class="title">Реализация</span>
+                                                  </a>
+                                               </li>
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/ubitok/3" class="nav-link ">
+                                                  <span class="title">Продажа в убыток</span>
+                                                  </a>
+                                               </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item  ">
+                                            <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-puzzle"></i>
+                                            <span class="title">Расходы</span>
+                                            <span class="arrow"></span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/expense/3" class="nav-link ">
+                                                  <span class="title">Расходы</span>
+                                                  </a>
+                                               </li>
+                                               
+                                            </ul>
+                                        </li>				                    
+                                        <li class="nav-item  ">
+                                            <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-basket"></i>
+                                            <span class="title">Товары</span>
+                                            <span class="arrow"></span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/products/3" class="nav-link ">
+                                                  <i class="icon-home"></i>
+                                                  <span class="title">Товары</span>
+                                                  </a>
+                                               </li>
+                                               
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item  ">
+                                            <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-user"></i>
+                                            <span class="title">Пользователи</span>
+                                            <span class="arrow"></span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                              
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/users/3" class="nav-link ">
+                                                  <i class="icon-user-female"></i>
+                                                  <span class="title">Системные Позьзователи</span>
+                                                  </a>
+                                               </li>
+                                            </ul>
+                                        </li>
+                                        
     
-    <link href="css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-    <link href="css/plugins.min.css" rel="stylesheet" type="text/css" />
+                                       
+                                    </ul>
+                                </li>
+                                 
+    
+                                                          
+                                          <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-home"></i>
+                                    <span class="title">Кызылкыя</span>
+                                    <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <a href="/finans/kassa/4" class="nav-link nav-toggle">
+                                            <i class="icon-diamond"></i>
+                                            <span class="title">Касса</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item  ">
+                                            <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-settings"></i>
+                                            <span class="title">Продажа</span>
+                                            <span class="arrow"></span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/sales/4" class="nav-link ">
+                                                  <span class="title">Продажа</span>
+                                                  </a>
+                                               </li>
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/realizations/4" class="nav-link ">
+                                                  <span class="title">Реализация</span>
+                                                  </a>
+                                               </li>
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/ubitok/4" class="nav-link ">
+                                                  <span class="title">Продажа в убыток</span>
+                                                  </a>
+                                               </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item  ">
+                                            <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-puzzle"></i>
+                                            <span class="title">Расходы</span>
+                                            <span class="arrow"></span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/expense/4" class="nav-link ">
+                                                  <span class="title">Расходы</span>
+                                                  </a>
+                                               </li>
+                                               
+                                            </ul>
+                                        </li>				                    
+                                        <li class="nav-item  ">
+                                            <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-basket"></i>
+                                            <span class="title">Товары</span>
+                                            <span class="arrow"></span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/products/4" class="nav-link ">
+                                                  <i class="icon-home"></i>
+                                                  <span class="title">Товары</span>
+                                                  </a>
+                                               </li>
+                                               
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item  ">
+                                            <a href="javascript:;" class="nav-link nav-toggle">
+                                            <i class="icon-user"></i>
+                                            <span class="title">Пользователи</span>
+                                            <span class="arrow"></span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                              
+                                               <li class="nav-item  ">
+                                                  <a href="/finans/users/4" class="nav-link ">
+                                                  <i class="icon-user-female"></i>
+                                                  <span class="title">Системные Позьзователи</span>
+                                                  </a>
+                                               </li>
+                                            </ul>
+                                        </li>
+                                        
+    
+                                       
+                                    </ul>
+                                </li>
+                                 
+    
+                                                      <li class="nav-item  ">
+                                <a data-toggle="modal" href="#myModal" class="nav-link nav-toggle">
+                                    <i class="icon-settings"></i>
+                                    <span class="title">Система</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- System cONTACT -->
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
 
-    <link href="css/profile.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/ticket.min.css" rel="stylesheet" type="text/css" />
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Сообшите если возникли проблемы в системе</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form role="form">
+                                            <div class="form-body">
+                                                <div class="form-group">
+                                                    <label>Email Address</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-envelope"></i>
+                                                        </span>
+                                                        <input type="text" class="form-control" placeholder="Email Address">
+                                                    </div>
+                                                </div>
 
-    <link href="css/layout.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/custom.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/darkblue.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Hello World</title>
-</head>
+                                                <div class="form-group">
+                                                    <label>Left Icon</label>
+                                                    <div class="input-icon">
+                                                        <i class="fa fa-bell-o font-green"></i>
+                                                        <input type="text" class="form-control" placeholder="Left icon">
+                                                    </div>
+                                                </div>
 
-<body>
-    <div class="app">
-        <div class="page-content-wrapper">
-            <div class="page-content">
-                <div class="page-bar">
-                    <ul class="page-breadcrumb">
-                        <li>
-                            <a href="index.html">Домой</a>
+                                                <div class="form-group">
+                                                    <label>Dropdown</label>
+                                                    <select class="form-control">
+                                                        <option>Option 1</option>
+                                                        <option>Option 2</option>
+                                                        <option>Option 3</option>
+                                                        <option>Option 4</option>
+                                                        <option>Option 5</option>
+                                                    </select>
+                                                </div>
 
-                            <i class="fa fa-circle"></i>
+                                                <div class="form-group">
+                                                    <label>Textarea</label>
+                                                    <textarea class="form-control" rows="3"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile1">File input</label>
+                                                    <input type="file" id="exampleInputFile1">
+                                                    <p class="help-block">
+                                                        some help text here.
+                                                    </p>
+                                                </div>
 
-                        </li>
+                                                <div class="form-group">
+                                                    <label>Inline Radio</label>
+                                                    <div class="mt-radio-inline">
+                                                        <label class="mt-radio">
+                                                            <input type="radio" name="optionsRadios" id="optionsRadios4" value="option1" checked="checked">
+                                                            Option 1
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="mt-radio">
+                                                            <input type="radio" name="optionsRadios" id="optionsRadios5" value="option2">
+                                                            Option 2
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="mt-radio">
+                                                            <input type="radio" name="optionsRadios" id="optionsRadios6" value="option3" disabled="disabled">
+                                                            Disabled
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                        <li>
-                            <p>Добро пожаловать {{ user.name }}</p>
-                            <p>Nobody is logged in</p>
-                        </li>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-unique">Отправить
+                                            <i class="fa fa-paper-plane-o ml-1"></i>
+                                        </button>
 
-                    </ul>
+                                    </div>
+                                </div>
 
-                    <div class="page-toolbar">
-
-                        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
-
-                            <i class="icon-calendar"></i>&nbsp;
-
-                            <span class="thin uppercase hidden-xs"></span>&nbsp;
-
-                            <i class="fa fa-angle-down"></i>
-
+                            </div>
                         </div>
 
                     </div>
-
+                    <!-- END SIDEBAR -->
                 </div>
-                <h1 class="page-title">
-                    <small>Статистика Бишкек</small>
-                </h1>
-                <div class="row">
+                <!-- END SIDEBAR -->
 
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <!-- BEGIN ADMIN -->
 
-                        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+                <div class="page-content-wrapper">
 
-                            <div class="visual">
+                    <!-- BEGIN CONTENT BODY -->
 
-                                <i class="fa fa-comments"></i>
+                    <div class="page-content">
 
-                            </div>
+                        <!-- BEGIN PAGE HEADER-->
 
-                            <div class="details">
+                        <!-- BEGIN PAGE BAR -->
 
-                                <div class="number">
+                        <div class="page-bar">
 
-                                    <span data-counter="counterup" data-value="1349">0</span>
+                            <ul class="page-breadcrumb">
 
-                                </div>
+                                <li>
 
-                                <div class="desc"> Реализация </div>
+                                    <p>Добро пожаловать
+                                        <strong>Admin</strong>
+                                    </p>
 
-                            </div>
+                                </li>
 
-                        </a>
+                            </ul>
 
-                    </div>
+                            <div class="page-toolbar">
 
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
 
-                        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+                                    <i class="icon-calendar"></i>&nbsp;
 
-                            <div class="visual">
+                                    <span class="thin uppercase hidden-xs"></span>&nbsp;
 
-                                <i class="fa fa-bar-chart-o"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number">
-
-                                    <span data-counter="counterup" data-value="12,5">0</span>M$
+                                    <i class="fa fa-angle-down"></i>
 
                                 </div>
 
-                                <div class="desc"> Остаток ТМЦ </div>
-
                             </div>
 
-                        </a>
+                        </div>
 
-                    </div>
+                        <!-- END PAGE BAR -->
 
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <!-- BEGIN PAGE TITLE-->
 
-                        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+                        <h1 class="page-title">Статистика Бишкек</h1>
 
-                            <div class="visual">
+                        <div class="row">
 
-                                <i class="fa fa-shopping-cart"></i>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 
-                            </div>
+                                <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
 
-                            <div class="details">
+                                    <div class="visual">
 
-                                <div class="number">
+                                        <i class="fa fa-money"></i>
 
-                                    <span data-counter="counterup" data-value="{{expenses.count}}">0</span>
-
-                                </div>
-
-                                <div class="desc"> Остаток Касса </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-globe"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number"> +
-
-                                    <span data-counter="counterup" data-value="89"></span>
-
-                                </div>
-
-                                <div class="desc"> Долги </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                </div>
-                <h1 class="page-title">
-                    <small>Статистика Ош</small>
-                </h1>
-                <div class="row">
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-comments"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number">
-
-                                    <span data-counter="counterup" data-value="1349">0</span>
-
-                                </div>
-
-                                <div class="desc"> Реализация </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-bar-chart-o"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number">
-
-                                    <span data-counter="counterup" data-value="12,5">0</span>M$
-
-                                </div>
-
-                                <div class="desc"> Остаток ТМЦ </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-shopping-cart"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number">
-
-                                    <span data-counter="counterup" data-value="{{expenses.count}}">0</span>
-
-                                </div>
-
-                                <div class="desc"> Остаток Касса </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-globe"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number"> +
-
-                                    <span data-counter="counterup" data-value="89"></span>%
-
-                                </div>
-
-                                <div class="desc"> Долги </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                </div>
-                <h1 class="page-title">
-                    <small>Статистика Ош 2</small>
-                </h1>
-                <div class="row">
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-comments"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number">
-
-                                    <span data-counter="counterup" data-value="1349">0</span>
-
-                                </div>
-
-                                <div class="desc"> Реализация </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-bar-chart-o"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number">
-
-                                    <span data-counter="counterup" data-value="12,5">0</span>M$
-
-                                </div>
-
-                                <div class="desc"> Остаток ТМЦ </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-shopping-cart"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number">
-
-                                    <span data-counter="counterup" data-value="{{expenses.count}}">0</span>
-
-                                </div>
-
-                                <div class="desc"> Остаток Касса </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-globe"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number"> +
-
-                                    <span data-counter="counterup" data-value="89"></span>%
-
-                                </div>
-
-                                <div class="desc"> Долги </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                </div>
-                <h1 class="page-title">
-                    <small>Статистика Кызылкыя</small>
-                </h1>
-                <div class="row">
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-comments"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number">
-
-                                    <span data-counter="counterup" data-value="1349">0</span>
-
-                                </div>
-
-                                <div class="desc"> Реализация </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-bar-chart-o"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number">
-
-                                    <span data-counter="counterup" data-value="12,5">0</span>M$
-
-                                </div>
-
-                                <div class="desc"> Остаток ТМЦ </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-shopping-cart"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number">
-
-                                    <span data-counter="counterup" data-value="{{expenses.count}}">0</span>
-
-                                </div>
-
-                                <div class="desc"> Остаток Касса </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
-
-                            <div class="visual">
-
-                                <i class="fa fa-globe"></i>
-
-                            </div>
-
-                            <div class="details">
-
-                                <div class="number"> +
-
-                                    <span data-counter="counterup" data-value="89"></span>%
-
-                                </div>
-
-                                <div class="desc"> Долги </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-                <div class="clearfix"></div>
-
-                <!-- END DASHBOARD STATS 1-->
-
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="portlet light bordered">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="icon-share font-red-sunglo hide"></i>
-                                    <span class="caption-subject font-dark bold uppercase">Реализация</span>
-                                    <span class="caption-helper">Ежемесячная Статистика</span>
-                                </div>
-                                <div class="actions">
-                                    <div class="btn-group">
-                                        <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                            Фильтр по кварталам
-                                            <span class="fa fa-angle-down"> </span>
-                                        </a>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li>
-                                                <a href="javascript:;"> 2018 1-й квартал</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> 2018 2-ой квартал</a>
-                                            </li>
-                                            <li class="active">
-                                                <a href="javascript:;"> 2018 3-ий квартал</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> 2018 4-й квартал</a>
-                                            </li>
-                                        </ul>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="portlet-body">
-                                <div id="site_activities_loading">
-                                    <img src="../assets/global/img/loading.gif" alt="Подождите" />
-                                </div>
-                                <div id="site_activities_content" class="display-none">
-                                    <div id="site_activities" style="height: 228px;"> </div>
-                                </div>
-                                <div style="margin: 20px 0 10px 30px">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                            <span class="label label-sm label-success"> Реализация: </span>
-                                            <h3>$13,234</h3>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="111000">0</span>
+                                            <small>KGS</small>
+
                                         </div>
-                                        <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                            <span class="label label-sm label-info"> Расходы: </span>
-                                            <h3>$134,900</h3>
+
+                                        <div class="desc">
+                                            Выручки
                                         </div>
-                                        <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                            <span class="label label-sm label-danger"> Транспорт: </span>
-                                            <h3>$1,134</h3>
-                                        </div>
-                                        <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                            <span class="label label-sm label-warning"> Долги: </span>
-                                            <h3>235090</h3>
-                                        </div>
+
                                     </div>
-                                </div>
+
+                                </a>
+
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="portlet light bordered">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="icon-bar-chart font-dark hide"></i>
-                                    <span class="caption-subject font-dark bold uppercase">Реализация Бишкек</span>
-                                    <span class="caption-helper">Ежемесячная Статистика</span>
-                                </div>
-                                <div class="actions">
-                                    <div class="btn-group">
-                                        <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                            Фильтр по кварталам
-                                            <span class="fa fa-angle-down"> </span>
-                                        </a>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li>
-                                                <a href="javascript:;"> 2018 1-й квартал</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> 2018 2-ой квартал</a>
-                                            </li>
-                                            <li class="active">
-                                                <a href="javascript:;"> 2018 3-ий квартал</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> 2018 4-й квартал</a>
-                                            </li>
-                                        </ul>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 blue-madison" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-reply"></i>
+
                                     </div>
-                                </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="1349">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Расходы
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
                             </div>
-                            <div class="portlet-body">
-                                <div id="site_statistics_loading">
-                                    <img src="../assets/global/img/loading.gif" alt="Подождите" />
-                                </div>
-                                <div id="site_statistics_content" class="display-none">
-                                    <div id="site_statistics" class="chart"> </div>
-                                </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 dark" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-trophy"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="1349">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Прибыль
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
                             </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-globe"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="89">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Долги
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="clearfix" style="display: inline-flex;width: 100%;"></div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 red-sunglo" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-rotate-left"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="12,5">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Остаток ТМЦ
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 purple-soft" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-signal"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="234">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Остаток Касса
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 green-meadow" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-line-chart"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="123"></span>%
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Прибыль в процентах
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+
                         </div>
+
+                        <h1 class="page-title">Статистика Ош 1</h1>
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-money"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="111000">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Выручки
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 blue-madison" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-reply"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="1349">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Расходы
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 dark" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-trophy"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="1349">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Прибыль
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-globe"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="89">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Долги
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="clearfix" style="display: inline-flex;width: 100%;"></div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 red-sunglo" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-rotate-left"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="12,5">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Остаток ТМЦ
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 purple-soft" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-signal"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="234">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Остаток Касса
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 green-meadow" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-line-chart"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="123"></span>%
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Прибыль в процентах
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <h1 class="page-title">Статистика Ош 2</h1>
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-money"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="111000">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Выручки
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 blue-madison" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-reply"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="1349">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Расходы
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 dark" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-trophy"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="1349">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Прибыль
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-globe"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="89">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Долги
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="clearfix" style="display: inline-flex;width: 100%;"></div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 red-sunglo" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-rotate-left"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="12,5">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Остаток ТМЦ
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 purple-soft" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-signal"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="234">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Остаток Касса
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 green-meadow" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-line-chart"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="123"></span>%
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Прибыль в процентах
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <h1 class="page-title">Статистика Кызылкыя</h1>
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-money"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="111000">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Выручки
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 blue-madison" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-reply"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="1349">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Расходы
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 dark" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-trophy"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="1349">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Прибыль
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-globe"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="89">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Долги
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="clearfix" style="display: inline-flex;width: 100%;"></div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 red-sunglo" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-rotate-left"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="12,5">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Остаток ТМЦ
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 purple-soft" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-signal"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="234">0</span>
+                                            <small>KGS</small>
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Остаток Касса
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <a class="dashboard-stat dashboard-stat-v2 green-meadow" href="#">
+
+                                    <div class="visual">
+
+                                        <i class="fa fa-line-chart"></i>
+
+                                    </div>
+
+                                    <div class="details">
+
+                                        <div class="number">
+
+                                            <span data-counter="counterup" data-value="123"></span>%
+
+                                        </div>
+
+                                        <div class="desc">
+                                            Прибыль в процентах
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <!--div class="row"> <div class="col-md-6 col-sm-6"> <div class="portlet light bordered"> <div class="portlet-title"> <div class="caption"> <i class="icon-share font-red-sunglo hide"></i> <span class="caption-subject font-dark bold uppercase">Реализация</span> <span class="caption-helper">Ежемесячная Статистика</span> </div> <div class="actions"> <div class="btn-group"> <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Фильтр по кварталам <span class="fa fa-angle-down"> </span> </a> <ul class="dropdown-menu pull-right"> <li> <a href="javascript:;"> 2018 1-й квартал</a> </li> <li> <a href="javascript:;"> 2018 2-ой квартал</a> </li> <li class="active"> <a href="javascript:;"> 2018 3-ий квартал</a> </li> <li> <a href="javascript:;"> 2018 4-й квартал</a> </li> </ul> </div> </div> </div> <div class="portlet-body"> <div id="site_activities_loading"> <img src="../assets/global/img/loading.gif" alt="Подождите" /> </div> <div id="site_activities_content" class="display-none"> <div id="site_activities" style="height: 228px;"> </div> </div> <div style="margin: 20px 0 10px 30px"> <div class="row"> <div class="col-md-3 col-sm-3 col-xs-6 text-stat"> <span class="label label-sm label-success"> Реализация: </span> <h3>$13,234</h3> </div> <div class="col-md-3 col-sm-3 col-xs-6 text-stat"> <span class="label label-sm label-info"> Расходы: </span> <h3>$134,900</h3> </div> <div class="col-md-3 col-sm-3 col-xs-6 text-stat"> <span class="label label-sm label-danger"> Транспорт: </span> <h3>$1,134</h3> </div> <div class="col-md-3 col-sm-3 col-xs-6 text-stat"> <span class="label label-sm label-warning"> Долги: </span> <h3>235090</h3> </div> </div> </div> </div> </div> </div> <div class="col-md-6 col-sm-6"> <div class="portlet light bordered"> <div class="portlet-title"> <div class="caption"> <i class="icon-bar-chart font-dark hide"></i> <span class="caption-subject font-dark bold uppercase">Реализация Бишкек</span> <span class="caption-helper">Ежемесячная Статистика</span> </div> <div class="actions"> <div class="btn-group"> <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Фильтр по кварталам <span class="fa fa-angle-down"> </span> </a> <ul class="dropdown-menu pull-right"> <li> <a href="javascript:;"> 2018 1-й квартал</a> </li> <li> <a href="javascript:;"> 2018 2-ой квартал</a> </li> <li class="active"> <a href="javascript:;"> 2018 3-ий квартал</a> </li> <li> <a href="javascript:;"> 2018 4-й квартал</a> </li> </ul> </div> </div> </div> <div class="portlet-body"> <div id="site_statistics_loading"> <img src="../assets/global/img/loading.gif" alt="Подождите" /> </div> <div id="site_statistics_content" class="display-none"> <div id="site_statistics" class="chart"> </div> </div> </div> </div> </div> </div> <div class="row"> <div class="col-md-6 col-sm-6"> <div class="portlet light bordered"> <div class="portlet-title"> <div class="caption"> <i class="icon-bar-chart font-dark hide"></i> <span class="caption-subject font-dark bold uppercase">Реализация Ош</span> <span class="caption-helper">Ежемесячная Статистика</span> </div> <div class="actions"> <div class="btn-group"> <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Фильтр по кварталам <span class="fa fa-angle-down"> </span> </a> <ul class="dropdown-menu pull-right"> <li> <a href="javascript:;"> 2018 1-й квартал</a> </li> <li> <a href="javascript:;"> 2018 2-ой квартал</a> </li> <li class="active"> <a href="javascript:;"> 2018 3-ий квартал</a> </li> <li> <a href="javascript:;"> 2018 4-й квартал</a> </li> </ul> </div> </div> </div> <div class="portlet-body"> <div id="site_statistics_loading2"> <img src="../assets/global/img/loading.gif" alt="Подождите" /> </div> <div id="site_statistics_content2" class="display-none"> <div id="site_statistics2" class="chart"> </div> </div> </div> </div> </div> <div class="col-md-6 col-sm-6"> <div class="portlet light bordered"> <div class="portlet-title"> <div class="caption"> <i class="icon-bar-chart font-dark hide"></i> <span class="caption-subject font-dark bold uppercase">Реализация Кызылкыя</span> <span class="caption-helper">Ежемесячная Статистика</span> </div> <div class="actions"> <div class="btn-group"> <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Фильтр по кварталам <span class="fa fa-angle-down"> </span> </a> <ul class="dropdown-menu pull-right"> <li> <a href="javascript:;"> 2018 1-й квартал</a> </li> <li> <a href="javascript:;"> 2018 2-ой квартал</a> </li> <li class="active"> <a href="javascript:;"> 2018 3-ий квартал</a> </li> <li> <a href="javascript:;"> 2018 4-й квартал</a> </li> </ul> </div> </div> </div> <div class="portlet-body"> <div id="site_statistics_loading3"> <img src="../assets/global/img/loading.gif" alt="Подождите" /> </div> <div id="site_statistics_content3" class="display-none"> <div id="site_statistics3" class="chart"> </div> </div> </div> </div> </div> </div-->
+
                     </div>
+
+                    <!-- END CONTENT BODY -->
+
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="portlet light bordered">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="icon-bar-chart font-dark hide"></i>
-                                    <span class="caption-subject font-dark bold uppercase">Реализация Ош</span>
-                                    <span class="caption-helper">Ежемесячная Статистика</span>
-                                </div>
-                                <div class="actions">
-                                    <div class="btn-group">
-                                        <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                            Фильтр по кварталам
-                                            <span class="fa fa-angle-down"> </span>
-                                        </a>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li>
-                                                <a href="javascript:;"> 2018 1-й квартал</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> 2018 2-ой квартал</a>
-                                            </li>
-                                            <li class="active">
-                                                <a href="javascript:;"> 2018 3-ий квартал</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> 2018 4-й квартал</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portlet-body">
-                                <div id="site_statistics_loading2">
-                                    <img src="../assets/global/img/loading.gif" alt="Подождите" />
-                                </div>
-                                <div id="site_statistics_content2" class="display-none">
-                                    <div id="site_statistics2" class="chart"> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="portlet light bordered">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="icon-bar-chart font-dark hide"></i>
-                                    <span class="caption-subject font-dark bold uppercase">Реализация Кызылкыя</span>
-                                    <span class="caption-helper">Ежемесячная Статистика</span>
-                                </div>
-                                <div class="actions">
-                                    <div class="btn-group">
-                                        <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                            Фильтр по кварталам
-                                            <span class="fa fa-angle-down"> </span>
-                                        </a>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li>
-                                                <a href="javascript:;"> 2018 1-й квартал</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> 2018 2-ой квартал</a>
-                                            </li>
-                                            <li class="active">
-                                                <a href="javascript:;"> 2018 3-ий квартал</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> 2018 4-й квартал</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portlet-body">
-                                <div id="site_statistics_loading3">
-                                    <img src="../assets/global/img/loading.gif" alt="Подождите" />
-                                </div>
-                                <div id="site_statistics_content3" class="display-none">
-                                    <div id="site_statistics3" class="chart"> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- END ADMIN -->
 
             </div>
+            <!-- Footer -->
+            <div class="page-footer">
+                <div class="page-footer-inner">
+                    2018 &copy; Proudle Caked By
+                    <a target="_blank" href="#">EL.NUR Team</a>
+                    &nbsp;|&nbsp;
 
-            <!-- END CONTENT BODY -->
-
+                </div>
+                <div class="scroll-to-top">
+                    <i class="icon-arrow-up"></i>
+                </div>
+            </div>
         </div>
-    </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="js/jquery.blockui.min.js"></script>
-    <script src="js/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-    <script src="js/moment.min.js"></script>
-    <script src="js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
-    <script src="js/counterup/jquery.waypoints.min.js"></script>
-    <script src="js/counterup/jquery.counterup.min.js"></script>
-    <script src="js/fullcalendar/fullcalendar.min.js"></script>
-    <script src="js/horizontal-timeline/horozontal-timeline.min.js"></script>
-    <script src="js/flot/jquery.flot.min.js"></script>
-    <script src="js/flot/jquery.flot.resize.min.js"></script>
-    <script src="js/flot/jquery.flot.categories.min.js"></script>
-    <script src="js/jquery-easypiechart/jquery.easypiechart.min.js"></script>
-    <script src="js/jquery.sparkline.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="js/jquery.blockui.min.js"></script>
+        <script src="js/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+        <script src="js/moment.min.js"></script>
+        <script src="js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+        <script src="js/counterup/jquery.waypoints.min.js"></script>
+        <script src="js/counterup/jquery.counterup.min.js"></script>
+        <script src="js/fullcalendar/fullcalendar.min.js"></script>
+        <script src="js/horizontal-timeline/horozontal-timeline.min.js"></script>
+        <script src="js/flot/jquery.flot.min.js"></script>
+        <script src="js/flot/jquery.flot.resize.min.js"></script>
+        <script src="js/flot/jquery.flot.categories.min.js"></script>
+        <script src="js/jquery-easypiechart/jquery.easypiechart.min.js"></script>
+        <script src="js/jquery.sparkline.min.js"></script>
 
-    <script type="text/javascript" src="js/app.min.js"></script>
-    <script type="text/javascript" src="js/dashboard.js"></script>
-    <script type="text/javascript" src="js/layout.min.js"></script>
-    <script type="text/javascript" src="js/demo.min.js"></script>
-    <script type="text/javascript" src="js/quick-sidebar.min.js"></script>
+        <script type="text/javascript" src="js/app.min.js"></script>
+        <script type="text/javascript" src="js/dashboard.js"></script>
+        <script type="text/javascript" src="js/demo.min.js"></script>
+        <script type="text/javascript" src="js/layout.js"></script>
 
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
-<script>
-     function getValues() {
-            var rows = document.querySelectorAll("tr.package-row");
-            rows.forEach(function (currentRow) {
-
-                var numberUsed = Number(currentRow.querySelector('#product_price').value);
-                var price = Number(currentRow.querySelector('#product_quantity').value);
-
-                var revenue = 0;
-
-                document.querySelectorAll('numberUsed');
-
-                if (numberUsed == "") {
-                    if (isNaN(price)) {
-                        return;
-                    }
-                    revenue = price * numberUsed;
-                }
-                else {
-                    if (isNaN(numberUsed) || isNaN(price)) {
-                        return;
-                    }
-                    revenue = price * numberUsed;
-                }
-                var value = revenue + " сом" ;
-                currentRow.querySelector("#product_sum").innerHTML = value;
-            });
-
-        }
-        document.querySelector('#check-button').addEventListener("click", CheckNull);
-        function CheckNull() {
-            var inputprice = document.querySelector('.check-null-price').value;
-            var inputqty = document.querySelector('.check-null-qty').value;
-            if(!inputprice || !inputqty){
-                event.preventDefault();
-                alert("Заполните поля цена, количество");
-            }
-            //document.getElementById(".check-button").innerHTML = "YOU CLICKED ME!";
-
-        }
-</script>
-</body>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+        <script>
+                $('.page-sidebar-menu .nav-item').on('click', function () {
+                    var r =  $(this).toggleClass('open');
+                           if($('.nav-item').hasClass('open')){
+                            $('li.nav-item.open > .sub-menu').show()
+                           }
+                           else{
+                            $('li.nav-item > .sub-menu').hide()
+                           }     
+                    });
+        </script>
+    </body>
 
 </html>

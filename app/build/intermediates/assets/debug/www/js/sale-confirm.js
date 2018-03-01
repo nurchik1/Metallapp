@@ -154,7 +154,13 @@ function getDelete(){
     event.preventDefault();
         $.get("http://ahbasys.com/finans/api/v1/cancel-sale/"+ window.localStorage.getItem('unique_id') +"?token=" + window.localStorage.getItem('token'), function (data, status) {
             var data2 = JSON.stringify(data);
+            if(data){
             alert(data2);
+            window.location.href = "manager.html";
+        }
+        else{
+            alert("Ошибка");
+        }
     });
 }
     
